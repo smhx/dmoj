@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "functional": "cpp",
-        "algorithm": "cpp",
-        "limits": "cpp"
-    }
-}

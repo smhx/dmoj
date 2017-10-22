@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "algorithm": "cpp",
-        "limits": "cpp",
-        "__split_buffer": "cpp",
-        "deque": "cpp",
-        "vector": "cpp"
-    }
-}

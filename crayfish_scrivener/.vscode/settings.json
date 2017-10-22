@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "cstdio": "cpp",
-        "iosfwd": "cpp",
-        "iterator": "cpp",
-        "vector": "cpp"
-    }
-}

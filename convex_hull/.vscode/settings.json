@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "memory": "cpp",
+        "utility": "cpp",
+        "queue": "cpp",
+        "cstdio": "cpp",
+        "algorithm": "cpp",
+        "iosfwd": "cpp",
+        "iterator": "cpp",
+        "vector": "cpp",
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "initializer_list": "cpp",
+        "__tuple": "cpp",
+        "tuple": "cpp",
+        "__bit_reference": "cpp"
+    }
+}

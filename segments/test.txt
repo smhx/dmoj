@@ -1,0 +1,182 @@
+TEST CASES
+
+CORRECT
+Sample input 
+6
+2 6
+3 4
+1 3
+1 2
+3 6
+4 5
+
+Expected output 
+24
+
+CORRECT
+Sample input 
+3
+2 3
+1 2
+2 3
+ 
+Expected output
+8
+
+CORRECT
+Sample input
+4
+1 3
+2 4
+1 2
+3 4
+
+Expected output
+12
+
+CORRECT
+Sample input
+5
+1 2
+3 4
+2 3
+2 5
+1 2
+
+Expected output
+20
+
+CORRECT
+Sample input
+5
+1 4
+2 5
+1 4
+2 5
+1 4
+
+Expected output
+24
+
+CORRECT
+Sample input
+5
+1 3
+2 3
+2 3
+3 4
+1 2
+
+Expected output
+16
+
+CORRECT
+Sample input
+4
+1 4
+2 4
+1 4
+1 3
+
+Expected output
+16
+
+CORRECT
+Sample input
+4
+1 3
+2 4
+1 4
+1 3
+
+Expected output
+14
+
+CORRECT
+Sample input
+3
+2 3
+2 2
+1 1
+
+Expected output
+8
+
+CORRECT
+Sample input
+2
+1 2
+1 2
+
+Expected output
+4
+
+CORRECT
+Sample input
+5
+1 5
+1 5
+1 5
+1 1
+1 5
+
+Expected output
+24
+
+CORRECT
+Sample input
+5
+1 5
+2 4
+3 3
+2 4
+1 5
+
+Expected output
+20
+
+CORRECT
+Sample input
+6
+1 5
+1 3
+2 5
+4 6
+2 5
+1 3
+
+Expected output
+30
+
+CORRECT
+Sample input
+6
+1 4
+1 3
+3 3
+4 6
+2 5
+1 3
+
+Expected output
+26
+
+CORRECT
+Sample input
+2
+2 2
+2 2
+
+Expected output
+2
+
+CORRECT 
+Sample input
+4
+1 4
+1 3
+1 2
+1 1
+
+Expected output
+14

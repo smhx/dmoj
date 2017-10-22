@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "cstdio": "cpp",
+        "memory": "cpp",
+        "utility": "cpp",
+        "__tree": "cpp",
+        "initializer_list": "cpp",
+        "iterator": "cpp",
+        "set": "cpp"
+    }
+}

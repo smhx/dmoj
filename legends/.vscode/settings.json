@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "__split_buffer": "cpp",
+        "initializer_list": "cpp",
+        "iterator": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "__hash_table": "cpp",
+        "atomic": "cpp",
+        "unordered_set": "cpp",
+        "algorithm": "cpp",
+        "limits": "cpp",
+        "string": "cpp",
+        "cstring": "cpp",
+        "unordered_map": "cpp",
+        "memory": "cpp",
+        "ios": "cpp",
+        "__locale": "cpp",
+        "bitset": "cpp"
+    }
+}

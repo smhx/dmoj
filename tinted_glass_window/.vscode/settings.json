@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "__split_buffer": "cpp",
+        "vector": "cpp",
+        "__bit_reference": "cpp",
+        "initializer_list": "cpp",
+        "iterator": "cpp"
+    }
+}

@@ -1,0 +1,70 @@
+/*
+    dp[i][l] holds the maximum if you use a subset of the first
+    l B elements, and the highest A element is i?
+
+    look at the l'th element. Either it is directly after element i,
+    in which case you cannot use i, and the highest A element is i-1.
+
+    Otherwise, it is directly after an element of B that cannot be used. 
+
+    This element might as well be the lowest element. 
+
+
+    So you have 
+    dp[i][l][r] := the maximum pick with highest A element i,
+    using only a subset l to r of B
+    1 <= l <= r, with sentinel (0, 0).
+
+    dp[i][l][r] = 
+
+    if (l > r), it is normal
+    
+    Case 1: Last one taken is A 
+        Case 1.1: Last one taken is i
+            Case 1.1.1: Skip an A after i
+                Applies only when i >= 2
+                x = max(x, A[i]+dp[i-2][l][r])
+            Case 1.1.2: Skip a B after i which might as well be l
+                x = max(x, A[i]+dp[i-1][l+1][r])
+        Case 1.2: Last one taken is not i
+            x = max(x, dp[i-1][l][r]) // need dp[0][l][r].
+    Case 2: Last one taken is B 
+        Case 2.1: Last one taken is r
+            Case 2.1.1: Skip an A after r (which is i)
+                x = max(x, B[r]+dp[i-1][l][r-1])
+            Case 2.1.2: Skip a B after r (which might as well b l)
+                Applies only when l < r
+                x = max(x, B[r]+dp[i][l+1][r-1])
+        Case 2.2: Last one taken is not r
+            x = max(x, dp[i][l][r-1])
+
+
+    // Your answers are all pretty close...
+    // Probs some stupid mistake in there somewhere.
+
+    If i > 0
+        Takes i:
+            Takes i first:
+                
+            Takes i second:
+        Doesn't take i:
+            x = max(x, dp[i-1][l][r])
+*/
+
+
+void display_alone() {
+    printf("ALONE:\n");
+    for (int i = 1; i <= N; ++i) printf("alone[%d]=%d\n", i, alone[i]);
+}
+
+void display_dp() {
+    printf("DP:\n");
+    for (int i = 1; i <= N; ++i) {
+        for (int l = 1; l <= M; ++l) {
+            for (int r = l; r <= M; ++r) {
+                printf("dp[%d][%d][%d]=%d ", i, l, r, dp[i][l][r]);
+            }
+            printf("\n");
+        }
+    }
+}

@@ -1,0 +1,26 @@
+ALGORITHM
+
+Let N be the number of rows in the grid, and for 0<=i< N, define
+L[i] to be the left point and
+R[i] to be the right point.
+Now define l[i] to be the length of the shortest path from the point (i+1, L[i]) to (N, N)
+that goes through each of the segments in rows i+2, i+3,..., N-1. 
+Note that you do not have to go through the segment in row i+1.
+Define r[i] analogously for the right most point.
+
+Then it follows immediately that r[N-1] = N-R[N-1] and l[N-1] = N-L[N-1].
+Now iterate from i = N-2 to i=0 inclusively. 
+
+For r[i], there are 3 cases:
+Case 1:
+	r[i] >= R[i+1]. In this case, you might as well just go down a row and move all the way to L[i+1].
+Case 2:
+	r[i] <= L[i+1]. In this case, you might as well just go down a row and move all the way to R[i+1]
+Case 3:
+	L[i+1]<R[i]<R[i+1]. In this case, you go down, 
+	but then it is not obvious whether you should go left first or right first.
+	You have to rely on the previous values of l[i+1] and r[i+1] and compare them.
+
+Ditto for l[i].
+
+The answer is just R[0]-1+r[0].

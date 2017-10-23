@@ -6,24 +6,25 @@
 using namespace std;
 typedef pair<int, int> ii;
 
-int N, M, visit[MAXN], dist[MAXN], sdist[MAXN];
-
+int N, M, dist[MAXN], sdist[MAXN];
+bool visit[MAXN];
 vector<ii> adj[MAXN];
 
-priority_queue<ii, vector<ii>, greater<ii> > pq;
+queue<int> q;
 
 
-int dijkstra(int src, int dst) {
+void bfs(int src) {
     for (int i = 1; i <= N; ++i) dist[i] = INF, sdist[i]=INF+1;
 
     dist[src]=0;
-    pq.push(ii(0, src));
+    q.push(src);
 
-    while (!pq.empty()) {
-        ii front = pq.top(); pq.pop();
-        int d = front.first, u = front.second;
+    while (!q.empty()) {
+   
+        int u = q.front(); q.pop();
+        int d=dist[u];
 
-        if (d > dist[u]) continue;
+        visit[u] = false;
 
         for (size_t i = 0; i < adj[u].size(); ++i) {
             int v = adj[u][i].second, w = adj[u][i].first;
@@ -32,33 +33,40 @@ int dijkstra(int src, int dst) {
             	sdist[v] = dist[v];
             	dist[v] = w+d;
 
-                if (w+sdist[u] > dist[v]) sdist[v] = min(sdist[v], w+sdist[u]);
-                pq.push(ii(dist[v], v));
+                if (w+sdist[u] > dist[v] && w+sdist[u] < sdist[v]) sdist[v] = w+sdist[u];
+                if (!visit[v]) {
+                    visit[v] = true;
+                    q.push(v);
+                }
 
             } else if (w+d < sdist[v] && w+d > dist[v]) {
             	sdist[v] = w+d;
-
-            	pq.push(ii(dist[v], v));
+                if (!visit[v]) {
+                    visit[v] = true;
+                    q.push(v);
+                }
             } else if (w+sdist[u] < sdist[v] && w+sdist[u] > dist[v]) {
             	sdist[v] = w+sdist[u];
-
-            	pq.push(ii(dist[v], v));
+            	if (!visit[v]) {
+                    visit[v] = true;
+                    q.push(v);
+                }
+                
             }
         }
     }
-    return sdist[dst];
 }
 
 int main() {
-// 	freopen("data.txt", "r", stdin);
+	freopen("data.txt", "r", stdin);
 	scanf("%d%d", &N, &M);
 
 	for (int i = 0, a, b, w; i < M; ++i) {
 		scanf("%d%d%d", &a, &b, &w);
 		adj[a].push_back(ii(w, b)); 
 	}
-    int ans = dijkstra(1, N);
-    if (ans >= INF) ans = -1;
-	printf("%d\n", ans);
+    bfs(1);
+    
+	printf("%d\n", sdist[N]>=INF ? -1 : sdist[N]);
 
 }

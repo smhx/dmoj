@@ -6,8 +6,7 @@ using namespace std;
 int N, M, apho, rsum=0, dia, best[MAXN];
 bool pho[MAXN];
 
-vector<int> adj[MAXN];
-vector<int> radj[MAXN];
+vector<int> adj[MAXN], radj[MAXN];
 
 bool trim(int u, int p) {
     bool haspho = pho[u];

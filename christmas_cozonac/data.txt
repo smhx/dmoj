@@ -1,0 +1,10 @@
+6
+( BakerYeast + Sugar ) = YeastReaction
+( Flour + Eggs + Milk + YeastReaction + Butter ) = Dough
+( Dough + Time ) = MoreDough
+( MoreDough + Knife ) = MoreDoughPart
+( Cocoa + Sugar + Egg + Egg ) = CocoaFilling
+( MoreDoughPart + CocoaFilling ) = CocoaCozonac
+2
+( ( Cocoa + Egg + Sugar + Egg ) + ( Knife + ( ( Flour + Eggs + ( BakerYeast + Sugar ) + Milk + Butter ) + Time ) ) )
+( ( Knife + ( ( Flour + Eggs + ( BakerYeast + Sugar ) + Milk + Butter ) + Time ) ) + CocoaFilling )

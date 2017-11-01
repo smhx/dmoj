@@ -9,6 +9,7 @@ const int MAXN = 100005;
 
 int N, M, f[MAXN], b[MAXN], grid[MAXN][6], bit[MAXN];
 ll A, B, s[MAXN];
+
 void update(int x, int v) {
 	for (;x <= N; x += x&-x) bit[x] += v;
 }

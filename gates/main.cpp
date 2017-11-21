@@ -4,7 +4,7 @@ using namespace std;
 int G, P;
 set<int> open;
 int main() {
-    freopen("s3/s3.9.in", "r", stdin);
+    // freopen("s3/s3.9.in", "r", stdin);
     scanf("%d%d", &G, &P);
     for (int i = 1; i <= G; ++i) open.insert(i);
     for (int i = 1; i <= P; ++i) {

@@ -22,17 +22,12 @@ int main() {
 		}
 		L[r] = r-l+1; g[r] = l;
 	}
-	// st[i][k] is the index of the maximum value of R[i]-i in [i, ..., i+2^k - 1]
 	for (int i = 1; i <= N; ++i) f[i][0] = i;
 	for (int k = 1; k < LOG; ++k) {
 		for (int i = 1; i <= N; ++i) {
 			if (i + (1<<k) <= N) {
-				if (R[ f[i][k-1] ]  >= R[ f[i+(1<<(k-1))][k-1]] ) {
-					f[i][k] = f[i][k-1];
-				} else {
-					f[i][k] = f[i+(1<<(k-1))][k-1];
-				}
-				printf("f[%d][%d] = %d\n", i, k, f[i][k]);
+				if (R[ f[i][k-1] ]  >= R[ f[i+(1<<(k-1))][k-1]] ) f[i][k] = f[i][k-1];
+				else f[i][k] = f[i+(1<<(k-1))][k-1];
 			}
 		}
 	}

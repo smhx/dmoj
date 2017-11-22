@@ -1,85 +1,53 @@
 #include <cstdio>
-#include <algorithm>
-#include <cstring>
-#include <algorithm>
+#include <deque>
 using namespace std;
-
-const int MAXN = 100005, LOG=20;
-int N, K, Q, A[MAXN], f[MAXN], g[MAXN], minst[MAXN][LOG], maxst[MAXN][LOG], lenst[MAXN][LOG];
+typedef pair<int, int> ii;
+const int MAXN = 100005, LOG = 19;
+int N, K, Q, A[MAXN], R[MAXN], L[MAXN], f[MAXN][LOG], g[MAXN];
 
 int main() {
+	freopen("data.txt", "r", stdin);
 	scanf("%d%d", &N, &K);
+	for (int i = 1; i <= N; ++i) scanf("%d", A+i);
 
-	memset(minst, 0x3f3f3f3f, sizeof minst);
-
-	for (int i = 1; i <= N; ++i) {
-		scanf("%d", A+i);
-		minst[i][0] = maxst[i][0] = A[i];
+	deque<ii> minq, maxq; 
+	for (int l = 1, r = 1; r <= N; ++r) {
+		while (!minq.empty() && minq.back().first > A[r]) minq.pop_back();
+		while (!maxq.empty() && maxq.back().first < A[r]) maxq.pop_back();
+		minq.emplace_back(A[r], r); maxq.emplace_back(A[r], r);
+		while (maxq.front().first - minq.front().first > K) {
+			if (maxq.front().second==l) maxq.pop_front();
+			if (minq.front().second==l) minq.pop_front();
+			R[l] = r-l; ++l;
+		}
+		L[r] = r-l+1; g[r] = l;
 	}
-
+	// st[i][k] is the index of the maximum value of R[i]-i in [i, ..., i+2^k - 1]
+	for (int i = 1; i <= N; ++i) f[i][0] = i;
 	for (int k = 1; k < LOG; ++k) {
 		for (int i = 1; i <= N; ++i) {
-			if (i + (1<<k) - 1 <= N) {
-				minst[i][k] = min(minst[i][k-1], minst[i + (1 << (k-1)) ][k-1]);
-				maxst[i][k] = max(maxst[i][k-1], maxst[i+(1<<(k-1))][k-1]);
-			}
-		}
-	}
-
-	for (int i = 1; i <= N; ++i) {
-		int m=A[i], M =A[i];
-		f[i] = i;
-		for (int k = LOG-1; k >= 0; --k) {
-			if (f[i] + (1<<k) <= N) {
-				int newm = min(m, minst[f[i]+1][k]);
-				int newM = max(M, maxst[f[i]+1][k]);
-				if (newM-newm <= K) {
-					f[i] += 1<<k;
-					m = newm, M = newM;
+			if (i + (1<<k) <= N) {
+				if (R[ f[i][k-1] ]  >= R[ f[i+(1<<(k-1))][k-1]] ) {
+					f[i][k] = f[i][k-1];
+				} else {
+					f[i][k] = f[i+(1<<(k-1))][k-1];
 				}
-			}
-		}
-	}
-
-	for (int i = 1; i <= N; ++i) {
-		int m = A[i], M = A[i];
-		g[i] = i;
-		for (int k = LOG-1; k >= 0; --k) {
-			if (g[i] - (1<<k) > 0) {
-				int newm = min(m, minst[g[i]-(1<<k )][k]);
-				int newM = max(M, maxst[g[i]-(1<<k)][k]);
-				if (newM-newm <= K) {
-					g[i] -= 1<<k;
-					m = newm, M = newM;
-				}
-			}
-		}
-	}
-
-	for (int i = 1; i <= N; ++i) lenst[i][0] = i;
-
-	for (int k = 1; k < LOG; ++k) {
-		for (int i = 1; i <= N; ++i) {
-			if (i + (1<<k) - 1 <= N) {
-				int a = lenst[i][k-1], b = lenst[i+(1<<(k-1))][k-1];
-				if (f[a] - a > f[b] - b) lenst[i][k] = a;
-				else if (f[a]-a < f[b]-b) lenst[i][k] = b;
-				else lenst[i][k] = min(a, b);
+				printf("f[%d][%d] = %d\n", i, k, f[i][k]);
 			}
 		}
 	}
 	scanf("%d", &Q);
 	while (Q--) {
-		int a,b; scanf("%d%d", &a, &b);
+		int a, b; scanf("%d%d", &a, &b);
 		int i = g[b], k=0; 
 		if (i <= a) {printf("%d %d\n", a, b); continue; }
 		for (; a + (1<<(k+1)) <= i; ++k);
-		int j, j1 = lenst[a][k], j2 = lenst[i-(1<<k)][k];
-		if (f[j1] - j1 > f[j2] - j2) j = j1;
-		else if (f[j1] - j1 == f[j2] - j2) j = min(j1, j2);
+		int j, j1 = f[a][k], j2 = f[i-(1<<k)][k];
+		if (R[j1] > R[j2] ) j = j1;
+		else if (R[j1]  == R[j2] ) j = min(j1, j2);
 		else j = j2;
 
-		if (b-i+1 > f[j]-j+1) printf("%d %d\n", i, b);
-		else printf("%d %d\n", j, f[j]);
+		if (b-i+1 > R[j]) printf("%d %d\n", i, b);
+		else printf("%d %d\n", j, R[j]+j-1);
 	}
 }

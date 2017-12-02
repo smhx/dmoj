@@ -10,14 +10,7 @@ const int SIZE = 55, INF = 1000000000;
 int N, M, R[SIZE][SIZE], presum[SIZE][SIZE], dp[SIZE][SIZE][SIZE][SIZE];
 int f(int r1, int r2, int c1, int c2) {
 	if (dp[r1][r2][c1][c2]!=-1) return dp[r1][r2][c1][c2];
-	int sum1 = 0;
-	for (int r = r1; r <= r2; ++r)
-		for (int c = c1; c <= c2; ++c)
-			sum1 += R[r][c];
 	int sum = presum[r2][c2]-presum[r1-1][c2]-presum[r2][c1-1]+presum[r1-1][c1-1];
-	if (sum!=sum1) {
-		printf("sum = %d, sum1 = %d, r1 = %d, r2 = %d, c1 =%d, c2=%d\n", sum, sum1, r1, r2, c1, c2);
-	}
 	int ans = INF;
 	for (int c = c1; c < c2; ++c) 
 		ans = min(ans, sum+f(r1,r2,c1,c)+f(r1,r2,c+1,c2) );

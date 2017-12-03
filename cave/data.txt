@@ -1,0 +1,90 @@
+4
+3 1 0 2
+0 1 0 1
+
+N
+doors
+switches (correct)
+
+Try turning everything else off!
+
+	Given a list U, fix x in U.
+
+	For every y!=x in U, v[y] ^= 1
+
+	Then pass this into tryCombination(v)
+	What happens?
+
+	You need to get rid of at least one. 
+
+	There are only 3 cases for each x.
+
+	Case 1: It is the lower bound.
+
+		Then you will discover it with tryCombination
+
+	Case 2: It is before the lower bound
+
+		Same.
+
+	Case 3: It is after the lower bound
+
+		Then you get no information about it...
+
+	You know the lower bound. It is fx
+
+	So how can you find the next best in log N tests?
+
+	Don't you just have to iterate over everything i.e., N tests?
+
+	You know that each x in U maps to a door d
+
+	Do this:
+
+	For each x in U
+		y = try combination for v[x]^=1
+		reset v. i.e., v[x] ^= 1
+		z = try combination for v[k]^=1 for every k in U and k != v
+
+		if y <= fx you know what to do
+
+		You know y != z.
+
+		All previous elements in U are AFTER fx. d[u] > fx.
+
+		Proof: If it were less than or equal to fx, then it would have been found and removed.
+
+
+		The bound is either after your current, or before it.
+
+		Then turn everything off before x. If it changes you look in that region.
+
+
+		Here is your algorithm
+
+		lo = 0, hi = U.size()-1
+		while (lo < hi)
+			mid = (lo+hi)/2
+			for i = lo to mid
+				v[i] ^= 1
+			y = tryCombination(v)
+			if (y != fx)
+				hi = mid
+			else
+				lo = mid + 1
+				// Do something to v?
+
+		// lo should be equal to hi
+		remove the lo'th element from U
+
+
+
+
+
+
+
+
+
+
+
+

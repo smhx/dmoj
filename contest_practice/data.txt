@@ -1,0 +1,39 @@
+4 11 5
+10 10 10 10
+10 10 2 5
+10 9 5 0
+0 10 0 0
+0 0 0 0
+6
+10 10 10 10
+10 10 2 5
+10 9 5 0
+0 10 0 0
+0 0 0 0
+10 9 5 0
+
+
+
+2 3 4
+1 0
+2 1
+2 0
+0 1
+4
+1 0
+2 1
+2 0
+0 1
+
+
+sort it decreasing would be what it is right now.
+
+So if you look at 10 9 5 0, it has index 2. So it's improvement index
+is less than or equal to 2+1 = 3. 
+
+Can you sort it in P different ways? Actually P! different ways...
+
+define cmp(i) as the compare function that prioritizes problem i
+and then the rest are prioritized in ascending order.
+
+Is the minimum of the compares the real index?

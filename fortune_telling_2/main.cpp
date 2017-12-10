@@ -80,8 +80,9 @@ int main() {
 			--compressB;
 			if (compressB < compressA) last[i] = -1;
 			else last[i] = querySparse(compressA, compressB);
-
 		}
+		printf("last[%d] = %d\n", i+1, last[i]);
+
 	}
 
 	vector<ii> x;
@@ -112,6 +113,7 @@ int main() {
 	}
 	ll ans =0;
 	for (int i=0; i<N;++i) {
+		printf("after[%d] = %d\n", i+1, after[i]);
 		if (last[i]==-1) {
 			if (after[i]&1) ans += 1LL*B[i];
 			else ans += 1LL*A[i];

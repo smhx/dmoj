@@ -1,81 +1,50 @@
-#include <cstdio>
 #include <vector>
-#include <set>
+#include <queue>
+#include <cstdio>
 #include <functional>
-
+#include <algorithm>
 using namespace std;
 
-const int MAX = 1 << 30;
+const int MAXN = 200005;
 
-int main () {
-	int N;
+int N, cost, cnt[MAXN];
+vector<int> p[MAXN];
+
+priority_queue<int, vector<int>, greater<int> > pq;
+
+int main() {
 	scanf("%d", &N);
-
-	vector< vector<int> > A(N);
-	vector<int> c(N+1);
-
-	int p=0, k=0, b=0;
-
-	multiset<int> buyable;
-
-	for (int i = 0; i < N; i++) {
-		int a, b;
-		scanf("%d %d", &a, &b);
-		if (a==N) {
-			k++;
-			p += b;
-			continue;
-		}
-		A[a].push_back(b);
+	for (int i = 0, a, b; i < N; ++i) {
+		scanf("%d%d", &a, &b);
+		p[a].push_back(b);
 	}
-
-	c[0] = 0;
-
-	for (int i = 0; i < N; i++) {
-		// printf("i in start is %d\n", i);
-		if (A[i].empty()) continue;
-		sort(A[i].begin(), A[i].end(), greater<int>() );
-		if (c[i] + A[i].size()-1 >= i) {
-			buyable.insert(A[i][0]);
-		}
-		for (int j = 1; j < (int)A[i].size(); j++) {
-			// printf("inserting j = %d\n", j);
-			buyable.insert(A[i][j]);
-		}
-		c[i+1] = c[i]+A[i].size();
+	for (int a = 0; a <= N; ++a) {
+		cnt[a] = p[a].size();
+		if (a) cnt[a] += cnt[a-1]; 
 	}
-
-
-	for (int i = 0; i < N; i++) {
-		// printf("i is %d\n", i);
-		if (!A[i].empty()) {
-			b += A[i].size()-1;
-			// You have to remove
-			if (c[i] >= i) {
-				buyable.erase(buyable.find(A[i][0]));
+	int l = 0, r = N, extra=0;
+	while (l < r) {
+		if (!p[l].empty()) {
+			extra += p[l].size()-1;
+		} else if (extra) {
+			--extra;
+		} else {
+			while (r > l && cnt[r-1]-cnt[l-1] >= r-l) {
+				while (!p[r].empty()) {
+					pq.push(p[r].back());
+					p[r].pop_back();
+				}
+				--r;
 			}
-			for (int j = 1; j < (int)A[i].size(); j++){
-				buyable.erase(buyable.find(A[i][j]));
+			if (l==r) break;
+			while (!p[r].empty()) {
+				pq.push(p[r].back());
+				p[r].pop_back();
 			}
-			continue;
+			cost += pq.top();
+			pq.pop();
 		}
-
-		if (b) {
-			b--;
-			continue;
-		}
-
-		if (k) {
-			k--;
-			continue;
-		}
-		
-		int min = *buyable.begin();
-		// printf("min is %d\n", min);
-		buyable.erase(buyable.begin());
-		p += min;
+		++l;
 	}
-	printf("%d\n", p);
-	return 0;
+	printf("%d\n", cost);
 }
-

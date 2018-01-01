@@ -5,22 +5,12 @@ using namespace std;
 const int MAXN = 100005;
 int N, K;
 char moves[MAXN];
-
-// (x, y) -> (x+y, x-y)
-// map from a := x+y
-
-// (x+P, y+P) -> (x+y+2*P, x-y)
-// So must be even
-
 map<int, set<int> > aset[2],bset[2];
-
 int main() {
 	freopen("data.txt", "r", stdin);
 	scanf("%d%d", &N, &K);
 	scanf(" %s", moves);
-	
 	int a, b;
-	
 	for (int i = 0; i < N; ++i) {
 		int x,y; scanf("%d%d", &x, &y);
 		if (!i) a=x+y, b=x-y;
@@ -28,15 +18,10 @@ int main() {
 		aset[B&1][A].insert(B);
 		bset[A&1][B].insert(A);
 	}
-	
 	for (int k = 0; k < K; ++k) {
-		printf("move %c\n", moves[k]);
 		if (moves[k]=='A' || moves[k]=='D') {
-			// increase a by even
 			auto it = bset[a&1][b].find(a);
-			if ( (moves[k]=='A' && it == --bset[a&1][b].end() ) || (moves[k]=='D' && it==bset[a&1][b].begin()) ) {
-				continue;
-			}
+			if ( (moves[k]=='A' && it == --bset[a&1][b].end() ) || (moves[k]=='D' && it==bset[a&1][b].begin()) ) continue;
 			if (moves[k]=='A')++it;
 			else --it;
 			int newa = *it;
@@ -45,20 +30,15 @@ int main() {
 			a = newa;
 		} else {
 			auto it = aset[b&1][a].find(b);
-			if ( (moves[k]=='B' && it == --aset[b&1][a].end()) || (moves[k]=='C' && it == aset[b&1][a].begin())) {
-				continue;
-			}
-			if (moves[k]=='B') {
-				++it;
-			} else {
-				--it;
-			}
+			if ( (moves[k]=='B' && it == --aset[b&1][a].end()) || (moves[k]=='C' && it == aset[b&1][a].begin())) continue;
+			
+			if (moves[k]=='B') ++it;
+			else --it;
 			int newb = *it;
 			aset[b&1][a].erase(b);
 			bset[a&1][b].erase(a);
 			b = newb;
 		}
-		printf("after %d steps: (%d, %d)\n", k+1, (a+b)/2, (a-b)/2);
 	}
 	printf("%d %d\n", (a+b)/2, (a-b)/2);
 }

@@ -1,0 +1,14 @@
+5
+equilibrium
+trivial
+organic
+lab
+adhoc
+7
+trivial
+organic
+adhoc
+equilibrium
+trivial
+lab
+adhoc

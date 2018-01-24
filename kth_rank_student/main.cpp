@@ -34,6 +34,7 @@ void init() {
 }
 
 int main() {
+	freopen("data.txt", "r", stdin);
 	scanf("%d%d", &N, &M);
 	for (int i = 1; i <= N; ++i) scanf("%d", order+i);
 	init();
@@ -53,7 +54,7 @@ int main() {
 			int xr = find(x);
 			if (k > os[xr].size()) printf("-1\n");
 			else {
-				auto it = os[xr].find_by_order(k);
+				auto it = os[xr].find_by_order(k-1);
 				printf("%d\n", it->second);
 			}
 		}

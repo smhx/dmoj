@@ -39,7 +39,7 @@ int dag[MAXN][MAXN];
 void compute_dag() {
 	for (int u = 1; u <= N; ++u) scc[u] = ncomps-scc[u]+1;
 	for (int i = 1; i < ncomps-i+1; ++i) swap(sz[i], sz[ncomps-i+1]);
-	for (int u = 1; u <= N; ++u) {
+	for (int u = 1; u <= N; ++u) 
 		for (int v : adj[u]) 
 			if (scc[u] != scc[v]) dag[scc[u]][scc[v]] = 1;
 	for (int u = 1; u <= ncomps; ++u) 
@@ -50,7 +50,7 @@ int d[MAXN][MAXN];
 
 void compute_dist(int dest) {
 	d[dest][dest]=0;
-	for (int src = dest-1; src; --src) {
+	for (int src = dest-1; src; --src) 
 		for (int u : dadj[src]) 
 			if (d[u][dest]!=-1) d[src][dest] = max(d[src][dest], sz[src]+d[u][dest]);
 }

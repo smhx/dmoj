@@ -3,81 +3,76 @@ using namespace std;
 
 typedef pair<int,int> ii;
 
-const int maxn = 5e4+4, up=1, dead=2;
-vector<ii> adj[maxn];
+const int MAXN = 5e4+5;
+vector<ii> adj[MAXN], ch[MAXN];
 
-int n, p[maxn], state[maxn];
+int N, dfst = 0, disc[MAXN], finish[MAXN], p[MAXN], c[MAXN];
 
-unordered_set<int> colours;
+list<int> s;
 
-void dfs(int u, int par, int col, bool d) {
-
-	printf("dfs(%d, %d, %d, %d)\n", u, par, col, d);
-
-	if (d) state[u] |= dead;
-
-	if (!d) {
-		colours.clear();
-		for (ii e : adj[u]) {
-			if (e.second != par) {
-				if (colours.find(e.first) != colours.end()) {d = true; break;}
-				colours.insert(e.first);
-			}
-		}
-	}
-
+void init(int u) {
+	disc[u] = ++dfst;
 	for (ii e : adj[u]) {
-		if (e.second != par) {
-			if (e.first == col) {
-				state[e.second] |= dead;
-				state[u] |= up;
-			}
+		if (e.second != p[u]) {
+			p[e.second] = u;
+			c[e.second] = e.first;
+			ch[u].push_back(e);
+			init(e.second);
 		}
 	}
-
-	int active = -1;
-
-	for (ii e : adj[u]) {
-		int v = e.second;
-		if (v != par) {
-			// printf("	u = %d, v = %d\n", u, v);
-			dfs(v, u, e.first, d);
-			if (state[v] & up) {
-				state[u] |= up;
-				state[u] |= dead;
-				// printf("	from u = %d, v = %d, v is up, state u now %d\n", u, v, state[u]);
-
-				if (active == -1) active = v; // v, you're still alive!
-				else active = -2; // everyone is dead
-			}
-		}
-	}
-
-	if (active == -2) {
-		for (ii e : adj[u]) state[e.second] |= dead;
-	} else if (active != -1) {
-		for (ii e : adj[u]) if (e.second != active) state[e.second] |= dead;
-	}
-	
+	finish[u] = ++dfst;
 }
 
+void solve(int u) {
+	for (ii e : ch[u]) {
+		if (e.first == c[u]) {
+			for (auto it = s.begin(); it != s.end(); ) {
+				int x = *it;
+				if ( !(disc[u] <= disc[x] && disc[x] <= finish[u]) || (disc[e.second] <= disc[x] && disc[x] <= finish[e.second] )) {
+					it = s.erase(it);
+				} else {
+					++it;
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < ch[u].size();) {
+		int j = i;
+		while (j+1 < ch[u].size() && ch[u][i].first == ch[u][j+1].first) ++j;
+		if (i != j) {	
+			int start = disc[ch[u][i].second], end = finish[ch[u][j].second];
+			for (auto it = s.begin(); it != s.end(); ) {
+				int x = *it;
+				if (start <= disc[x] && finish[x] <= end) {
+					it = s.erase(it);
+				} else {
+					++it;
+				}
+			}
+		}
+		i = j+1;
+	}
+
+	for (ii e : ch[u]) {
+		
+		solve(e.second);
+		
+	}
+}
 
 int main() {
 	freopen("data.txt", "r", stdin);
-	scanf("%d", &n);
-	for (int i = 1, a, b, c; i < n; ++i) {
-		scanf("%d%d%d", &a, &b, &c);
+	scanf("%d", &N);
+	for (int i = 1; i < N; ++i) {
+		int a, b, c; scanf("%d%d%d", &a, &b, &c);
 		adj[a].push_back({c, b});
 		adj[b].push_back({c, a});
 	}
-	dfs(1, 0, 0, 0);
-	if (state[1] & up) return !printf("0\n");
-	queue<int> q;
-	for (int i = 1; i <= n; ++i) {
-		if ((state[i]&dead) == 0) {
-			q.push(i);
-		}
-	}
-	printf("%lu\n", q.size());
-	for (; !q.empty(); q.pop()) printf("%d\n", q.front());
+	for (int u = 1; u <= N; ++u) sort(adj[u].begin(), adj[u].end());
+	init(1);
+	for (int u = 1; u <= N; ++u) s.push_back(u);
+	solve(1);
+	printf("%lu\n", s.size());
+	for (int x : s) printf("%d\n", x);
 }

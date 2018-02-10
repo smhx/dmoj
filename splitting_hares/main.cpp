@@ -78,7 +78,7 @@ void solve(const vector<pair<double,int> >& q, int i) {
 
 
 int main() {
-// 	freopen("data.txt", "r", stdin);
+	freopen("data.txt", "r", stdin);
 	scanf("%d", &N);
 	for (int i = 0; i < N; ++i) scanf("%lf%lf%d", &p[i].x, &p[i].y, w+i);
 

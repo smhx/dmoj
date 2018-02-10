@@ -38,6 +38,7 @@ int main() {
 
 	int T;
 	scanf("%d", &T);
+	
 	while (T--) {
 		int m, x, y;
 		scanf("%d%d%d", &m, &x, &y);

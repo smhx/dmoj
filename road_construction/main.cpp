@@ -4,7 +4,7 @@ using namespace std;
 
 const int maxn = 100005;
 
-vector<int> adj[maxn], tree[maxn];
+vector<int> adj[maxn];
 int n, r, deg[maxn];
 
 int dfst=0, disc[maxn], low[maxn], p[maxn];	

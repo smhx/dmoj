@@ -16,7 +16,6 @@ int N, M, numppl=0, maxa[MAXN], A[MAXN], B[MAXN], t[2*MAXN];
 vector<int> cb;
 set<ii> avals[MAXN];
 
-
 // sets element x to v, zero indexed.
 void update(int x, int v) {
     for (t[x+=M]=v; x>1; x >>= 1) t[x>>1] = max(t[x], t[x^1]);

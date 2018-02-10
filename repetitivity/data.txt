@@ -1,0 +1,14 @@
+zoo
+1000
+
+Observation 1: dp[i][i] = Repitivity of s[1...i]
+
+Observation 2: dp[i][j] = dp[j][i]
+
+Observation 3: dp[i-1][i] = 1/2 dp[i][i]
+
+Observation 4: dp[0][i] = 1
+
+Observation 5: dp[i][j] depends on whether s[i]==s[j]
+	If they're the same, add dp[i-1][j]+dp[i][j-1]
+	If they're different, do above then subtract dp[i-1][j-1]

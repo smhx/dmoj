@@ -14,10 +14,8 @@ int main() {
 
     for (int i = 1; i < 2001; i++) {
         if (!L[i]) continue;
-        printf("i is %d\n", i);
         for (int j = i; j < 2001; j++) {
             if (!L[j]) continue;
-            printf("    j is %d\n", j);
             int sum= i+j;
             int k;
             if (i==j) {

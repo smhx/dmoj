@@ -1,0 +1,22 @@
+
+Call a move essential if it takes p[i] closer to i.
+Or it is a bridge
+
+Claim:
+
+If s = 0, then there exists a way to sort using only essential or bridge moves.
+
+This is true if there is exactly 1 cycle.
+
+If there are 2 cycles, it is true as well.
+
+Case 1:
+
+The cycles [l1, r1] and [l2, r2] do not overlap.
+
+Case 2: [l1, r1] contains [l2, r2].
+
+This is true as well.
+
+Case 3: l1 < l2 < r1 < r2
+

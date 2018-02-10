@@ -37,7 +37,6 @@ int main() {
 		nzero += 1LL * cntvalR[v] * cntvalC[v];
 	}
 
-
 	for (int i = 0; i < P; ++i) {
 		int r1, r2, c1, c2; 
 		scanf("%d%d%d%d", &r1, &c1, &r2, &c2);
@@ -66,7 +65,6 @@ int main() {
 			++cntvalR[xorR[r1]^p];
 			--cntvalR[xorR[r2]];
 			++cntvalR[xorR[r2]^p];
-
 		}
 		
 		if (c1 != c2) {

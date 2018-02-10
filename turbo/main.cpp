@@ -69,27 +69,16 @@ int main() {
 	int lo = 0, hi = N+1;
 	for (int k = 1; k <= N; ++k) {
 		int val;
-		if (k&1) {
-			val = lo+1;
-		} else {
-			val = hi-1;
-		}
+		if (k&1) val = ++lo;
+		else val = --hi;
 		lower.push_back(ii(idx[val]-1, k));
 		upper.push_back(ii(idx[val]+1, k));
-		if (k&1) {
-			++lo;
-		} else {
-			--hi;
-		}
 	}
-
 	sort(lower.begin(), lower.end());
 	sort(upper.begin(), upper.end(), greater<ii>());
-
 	processUpper();
 	memset(bit, 0, sizeof bit);
 	processLower();
-
 	for (int k = 1; k <= N; ++k) {
 		int swaps;
 		if (k&1) {

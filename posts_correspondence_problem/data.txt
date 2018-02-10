@@ -1,0 +1,24 @@
+10
+3
+abc
+def
+ghi
+jkl
+mno
+pqr
+
+7
+3
+a
+abaaa
+ab
+aaa
+ab
+b
+
+
+2 2
+aa
+b
+a
+ab

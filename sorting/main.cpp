@@ -2,18 +2,12 @@
 #include <algorithm>
 using namespace std;
 const int MAXN = 200005, LOG = 20;
-
 int dest[MAXN], rdest[MAXN], pos[MAXN], tmp[MAXN], tmpS[MAXN];
-
-void computeDest(int N, const int S[], int M, const int X[], const int Y[]) {
+bool solve(int N, int S[], int M, const int X[], const int Y[], int P[], int Q[]) {
 	for (int i = 0; i < N; ++i) tmp[i] = S[i];
 	for (int i = 0; i < M; ++i) swap(tmp[X[i]], tmp[Y[i]]);
 	for (int i = 0; i < N; ++i) dest[tmp[i]]=i;
 	for (int i = 0; i < N; ++i) rdest[dest[i]]=i;
-}
-
-bool solve(int N, int S[], int M, const int X[], const int Y[], int P[], int Q[]) {
-	computeDest(N, S, M, X, Y);
 	for (int i = 0; i < N; ++i) pos[S[i]]=i;
 	int k = 0;
 	for (int i = 0; i < M; ++i) {
@@ -33,7 +27,6 @@ bool solve(int N, int S[], int M, const int X[], const int Y[], int P[], int Q[]
 	for (int i = 0; i < N; ++i) if (S[i]!=i) return false;
 	return true;
 }
-
 int findSwapPairs(int N, int S[], int M, int X[], int Y[], int P[], int Q[]) {
 	bool alreadySorted = true;
 	for (int i = 0; i < N; ++i) if (S[i]!=i) alreadySorted = false;

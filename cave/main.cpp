@@ -41,7 +41,6 @@ void exploreCave(int N) {
 
 int testN, testC[MAXN], testD[MAXN], testDoorRev[MAXN];
 
-
 int tryCombination(int S[]) {
 	for (int door = 0; door < testN; ++door) {
 		int swt = testDoorRev[door];

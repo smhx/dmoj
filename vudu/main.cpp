@@ -17,6 +17,7 @@ ll sum(int x) {
 }
 
 int main() {
+	freopen("data.txt", "r", stdin);
 	scanf("%d", &N);
 	for (int i = 1; i <= N; ++i) {
 		scanf("%lld", x+i);

@@ -81,10 +81,10 @@ void solve(int u) {
 	memset(in, 0, sizeof in);
 
 	for (int i = 1; i <= N; ++i) if (!visit[i]) dfsIn(i, u);
+
 	for (int i = 1; i <= M; ++i) 
 		if (active[i]) ans[i] = (ans[i]+(in[e[i].a]*out[e[i].b])%MOD)%MOD;
 }
-
 
 int main() {
 	scanf("%d%d", &N, &M);

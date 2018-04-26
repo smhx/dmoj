@@ -1,8 +1,3 @@
-/*input
-7 3
-1 2 3
-1 2 3 4
-*/
 #include <bits/stdc++.h>
 using namespace std;
 int N, K, stu[1000005];

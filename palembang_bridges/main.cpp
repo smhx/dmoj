@@ -171,7 +171,7 @@ void test2() {
 }
 
 int main() {
-	freopen("data.txt", "r", stdin);
+	// freopen("data.txt", "r", stdin);
 	input();
 	// test2();	
 	if (k==1) {

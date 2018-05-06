@@ -16,7 +16,7 @@ int main() {
 	}
 	int at = start+1;
 	if (at == N+1) at = 1;
-	for (int i = 0; i < N; ++i) {
+	for (int i = 0; i < 2*N; ++i) {
 		if (stu[at]) {
 			s.push(stu[at]);
 			stu[at] = 0;
